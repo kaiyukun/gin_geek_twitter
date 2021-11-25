@@ -1,0 +1,81 @@
+* {
+    padding: 0;
+    margin: 0;
+}
+body {
+    font-family: "Hiragino Kaku Gothic Pro", "ヒラギノ角ゴ Pro W3", "メイリオ",
+    Meiryo, "ＭＳ Ｐゴシック", sans-serif;
+}
+header {
+    background-color: #00acee;
+    height: 80px;
+    font-weight: bold;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+header a {
+    color: white; 
+    text-decoration: none; 
+}
+header h1 {
+    color: white;
+    margin-left: 20px;
+}
+.header-list {
+    display: flex;
+    align-items: center;
+}
+header ul {
+    display: flex;
+}
+header li {
+    list-style: none;
+    margin-right: 40px;
+}
+
+.tweets-container {
+    width: 50%;
+    margin: 10px auto;
+}
+h3 {
+    margin-bottom: 30px;
+}
+.tweet {
+    border-top: solid #00acee;
+    margin-top: 10px;
+    padding-top: 20px;
+}
+.main-box {
+    margin: 5px 0;
+    display: flex;
+    justify-content: space-between;
+}
+.time {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.post-container {
+    margin: 50px auto;
+    width: 50%;
+    border: solid #d3def1;
+    border-radius: 10px;
+    text-align: center;
+    background-color: #d3def1;
+}
+.title {
+    font-size: 32px;
+    font-weight: bold;
+    margin-bottom: 50px;
+}
+input[type="text"] {
+    width: 95%;
+    height: 40px;
+}
+input[type="submit"] {
+    width: 200px;
+    font-size: 20px;
+    margin-top: 50px;
+    margin-bottom: 30px;
+}

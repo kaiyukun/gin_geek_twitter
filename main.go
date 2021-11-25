@@ -86,6 +86,7 @@ func dbDelete(id int) {
 func main() {
     router := gin.Default()
     router.LoadHTMLGlob("views/*.html")
+	router.Static("/assets", "./assets/css")
 
 	dbInit()
 
@@ -97,23 +98,39 @@ func main() {
         })
     })
 
+	// New
+	router.GET("/new", func(ctx *gin.Context) {
+		ctx.HTML(200, "new.html", gin.H{})
+	})
+
 	//Create
-    router.POST("/new", func(ctx *gin.Context) {
+    router.POST("/post", func(ctx *gin.Context) {
         text := ctx.PostForm("text")
         status := ctx.PostForm("status")
         dbInsert(text, status)
         ctx.Redirect(302, "/")
     })
 
-	//Show
-    router.GET("/show/:id", func(ctx *gin.Context) {
+	// Show
+	router.GET("/show/:id", func(ctx *gin.Context) {
+		n := ctx.Param("id")
+		id, err := strconv.Atoi(n)
+		if err != nil {
+			panic(err)
+		}
+		todo := dbGetOne(id)
+		ctx.HTML(200, "show.html", gin.H{"todo": todo})
+	})
+
+	//Edit
+    router.GET("/edit/:id", func(ctx *gin.Context) {
         n := ctx.Param("id")
         id, err := strconv.Atoi(n)
         if err != nil {
             panic(err)
         }
         todo := dbGetOne(id)
-        ctx.HTML(200, "show.html", gin.H{"todo": todo})
+        ctx.HTML(200, "edit.html", gin.H{"todo": todo})
     })
 
 	//Update

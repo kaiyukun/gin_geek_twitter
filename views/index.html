@@ -3,28 +3,32 @@
 <head>
     <meta charset="UTF-8">
     <title>Sample App</title>
+    <link rel="stylesheet" type="text/css" href="../assets/style.css">
 </head>
 <body>
-    <h2>追加</h2>
-    <form method="post" action="/new">
-        <p>内容<input type="text" name="text" size="30" placeholder="入力してください" ></p>
-        <p>状態
-            <select name="status">
-                <option value="未実行">未実行</option>
-                <option value="実行中">実行中</option>
-                <option value="終了">終了</option>
-            </select>
-        </p>
-        <p><input type="submit" value="Send"></p>
-    </form>
-    
-    <ul>
-        {{ range .todos }}
-            <li>内容：{{ .Text }}、状態：{{ .Status }}
-                <label><a href="/show/{{.ID}}">編集</a></label>
-                <label><a href="/show_check/{{.ID}}">削除</a></label>
-            </li>
-        {{end}}
-    </ul>
+    <header>
+        <h1>GeekTwitter</h1>
+        <div class="header-list">
+            <ul>
+                <li><a href="/new">新規投稿</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <div class="tweets-container">
+        <h3>Todo一覧</h3>
+            {{ range .todos}}
+                <div class="tweet">
+                <div class="main-box">
+                    <div class="left-container">内容：{{ .Text }}、状態：{{ .Status }}</div>
+                        <div class="right-container">
+                            <a href="/show/{{.ID}}">詳細</a>
+                            <a href="/edit/{{.ID}}">編集</a>
+                            <a href="/delete_check/{{.ID}}">削除</a>
+                        </div>
+                    </div>
+                </div>
+            {{ end }}
+        </div>
     </body>
 </html>
