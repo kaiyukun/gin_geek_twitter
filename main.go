@@ -2,6 +2,7 @@ package main
 
 import (
 	"strconv"
+    "net/http"
 	"github.com/gin-gonic/gin"
 	"github.com/jinzhu/gorm"
 
@@ -169,5 +170,6 @@ func main() {
 
     })
 
-    router.Run()
+    // router.Run()
+    http.ListenAndServe(":8080", router)
 }
