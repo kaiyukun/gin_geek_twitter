@@ -1,6 +1,7 @@
 package main
 
 import (
+    "os"
 	"strconv"
     "net/http"
 	"github.com/gin-gonic/gin"
@@ -85,6 +86,11 @@ func dbDelete(id int) {
 }
 
 func main() {
+    port := os.Getenv("PORT")
+
+    if port == "" {
+        port = "3000"
+    }
     router := gin.Default()
     router.LoadHTMLGlob("views/*.html")
 	router.Static("/assets", "./assets/css")
@@ -94,14 +100,14 @@ func main() {
 	//Index
     router.GET("/", func(ctx *gin.Context) {
         todos := dbGetAll()
-        ctx.HTML(200, "index.html", gin.H{
+        ctx.HTML(http.StatusOK, "index.html", gin.H{
             "todos": todos,
         })
     })
 
 	// New
 	router.GET("/new", func(ctx *gin.Context) {
-		ctx.HTML(200, "new.html", gin.H{})
+		ctx.HTML(http.StatusOK, "new.html", gin.H{})
 	})
 
 	//Create
@@ -170,6 +176,5 @@ func main() {
 
     })
 
-    // router.Run()
-    http.ListenAndServe(":8080", router)
+    router.Run(":" + port)
 }
